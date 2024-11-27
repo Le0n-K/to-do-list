@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="mb-4">Tag List</h1>
+
+  <!-- Add Tag Button -->
+  <a href="{% url 'to_do_list:tag-create' %}" class="btn btn-primary mb-3">Add a new tag</a>
+
+  <!-- Tag Table -->
+  <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+          <tr>
+              <th>Tag Name</th>
+              <th>Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for tag in tags %}
+          <tr>
+              <td>{{ tag.name }}</td>
+              <td>
+                  <a href="{% url 'to_do_list:tag-update' tag.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                  <a href="{% url 'to_do_list:tag-delete' tag.pk %}" class="btn btn-danger btn-sm ml-2">Delete</a>
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+{% endblock %}
+
+
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{#<h1 class="mb-4">TODO List</h1>#}
+{#  #}
+{#<a href="{% url 'to_do_list:task-create' %}" class="btn btn-primary mb-3">Add Task</a>#}
+{#  #}
+{#<ul class="list-group">#}
+{#    {% for task in tasks %}#}
+{#        <li class="list-group-item d-flex justify-content-between align-items-center mb-3">#}
+{#            <div class="task-details">#}
+{#                <strong>{{ task.content }}</strong>#}
+{#                <div class="text-muted">#}
+{#                    <span class="{% if task.is_done %}text-success{% else %}text-danger{% endif %}">#}
+{#                        {{ task.is_done|yesno:"Done,Not Done" }}#}
+{#                    </span> | #}
+{#                    <span>{{ task.datetime|date:"Y-m-d H:i" }}</span>#}
+{#                </div>#}
+{#                {% if task.deadline_datetime %}#}
+{#                    <small class="text-warning"> (Deadline: {{ task.deadline_datetime|date:"Y-m-d H:i" }}) </small>#}
+{#                {% endif %}#}
+{#                <div class="text-muted">Tags: {{ task.tags.all|join:", " }}</div>#}
+{#            </div>#}
+{##}
+{#            <div class="task-actions">#}
+{#                <a href="{% url 'to_do_list:task-update' pk=task.id %}" class="btn btn-warning btn-sm mr-2">Edit</a>#}
+{#                <a href="{% url 'to_do_list:task-delete' pk=task.id %}" class="btn btn-danger btn-sm mr-2">Delete</a>#}
+{#                <a href="{% url 'to_do_list:task-toggle' pk=task.id %}" #}
+{#                   class="btn {% if task.is_done %}btn-outline-secondary{% else %}btn-success{% endif %} btn-sm">#}
+{#                    {% if task.is_done %}Undo{% else %}Complete{% endif %}#}
+{#                </a>#}
+{#            </div>#}
+{#        </li>#}
+{#    {% endfor %}#}
+{#</ul>#}
+{#{% endblock %}#}
